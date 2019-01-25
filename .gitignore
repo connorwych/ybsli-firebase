@@ -15,6 +15,8 @@ firebase-debug.log*
 
 # Private Config Files
 conf/
+/functions/firebase-db.json
+/functions/key.json
 
 
 # Uncomment this if you'd like others to create their own Firebase project.

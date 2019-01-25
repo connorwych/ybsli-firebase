@@ -1,7 +1,7 @@
 const firebase = require("firebase-admin");
 const functions = require('firebase-functions');
-const serviceAccount = require("../conf/key.json");
-const firebaseDb = require("../conf/firebase-db.json");
+const serviceAccount = require("./key.json");
+const firebaseDb = require("./firebase-db.json");
 
 // const interpreterListingData = ["FIRST_NAME","LAST_NAME"];
 const interpreterListingData = ["FIRST_NAME","LAST_NAME","GENDER","MENTAL_HEALTH_WORK","LEGAL_WORK","IMG_URL"];
@@ -24,7 +24,7 @@ function returnData() {
     return new Promise (function(resolve, reject) {
       firebase.initializeApp({
       credential: firebase.credential.cert(serviceAccount),
-      databaseURL: firebaseDb.databaseURL;
+      databaseURL: firebaseDb.databaseURL
     });
     console.info("Initialising database")
     const db = firebase.database();
