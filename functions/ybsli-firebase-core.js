@@ -4,9 +4,29 @@ const serviceAccount = require("./key.json");
 const firebaseDb = require("./firebase-db.json");
 
 const core = {
+  returnData: function(fields ,filters) {
+    return new Promise (function(resolve, reject) {
+      core.getRawData().then(function(data) {
+        // data = core.filterByValue(data, filters);
+        console.log("returnData: Returning data");
+        data = core.selectFields(data, fields);
+        core.cleanUp();
+        resolve(data);
+      }).catch(function(error) {
+        console.log("returnData: Could not retun data");
+        console.error(error);
+        core.cleanUp();
+        reject(error);
+      })
+      // .finally(function(){
+      //   console.log("returnData: cleaning up");
+      //   core.cleanUp();
+      // });
+    });
+  },
 
   // Attach an asynchronous callback to read the data at our posts reference
-  returnData: function () {
+  getRawData: function () {
     return new Promise (function(resolve, reject) {
       firebase.initializeApp({
         credential: firebase.credential.cert(serviceAccount),
@@ -17,10 +37,10 @@ const core = {
       const ref = db.ref(firebaseDb.collectionName);
 
       ref.once("value", function(snapshot) {
-        // console.info("retutnData: returning JSON");
+        console.log("getRawData: Returning FB Data")
         resolve(snapshot.toJSON());
       }, function (errorObject) {
-        // console.error("retutnData: could not return JSON");
+        console.error("getRawData: could not return JSON");
         reject(errorObject.code);
       });
     });
@@ -42,14 +62,14 @@ const core = {
     return arr;
   },
 
-  // filterByValue: function (item) {
-  //   for (var key in filter) {
-  //     if (item[key] === undefined || item[key] != filter[key]) {
-  //       return false;
-  //     }
-  //   }
-  //   return true;
-  // },
+  filterByValue: function (item, filter) {
+    // for (var key in filter) {
+    //   if (item[key] === undefined || item[key] != filter[key]) {
+    //     return false;
+    //   }
+    // }
+    // return true;
+  },
 
   cleanUp: function() {
     firebase.app().delete();

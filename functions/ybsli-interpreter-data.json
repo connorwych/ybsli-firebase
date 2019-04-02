@@ -1,5 +1,14 @@
 {
-  "interpreterListingData": ["FIRST_NAME","LAST_NAME","GENDER","MENTAL_HEALTH_WORK","LEGAL_WORK","IMG_URL"],
-  "interpreterBioData": [],
-  "interpreterEmailData": []
+  "interpreterListingData": {
+    "data": ["FIRST_NAME", "LAST_NAME", "GENDER", "MENTAL_HEALTH_WORK", "LEGAL_WORK", "IMG_URL"],
+    "filters": []
+  },
+  "interpreterBioData": {
+  "data": ["FIRST_NAME", "SECOND_NAME", "RSLI", "MASLI", "MVLP", "MOBILE", "GENDER", "MENTAL_HEALTH_WORK", "LEGAL_WORK", "IMG_URL", "BIO", "VIDEO_URL", "YEAR_QUALIFIED"],
+  "filters": []
+},
+  "interpreterEmailData": {
+    "data": ["EMAIL"],
+    "filters": ["EMAIL_ALL", "GENDER", "LEGAL_WORK", "MENTAL_HEALTH_WORK"]
+  }
 }

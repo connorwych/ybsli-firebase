@@ -5,19 +5,32 @@ const inrerpreterDataFields = require("./ybsli-interpreter-data");
 
 
 exports.getInterpreterListing = functions.https.onRequest((req, res) => {
-  const interpreterListingData = inrerpreterDataFields.interpreterListingData;
-  core.returnData()
-  .then(function(data) {
-    // console.info("retrived data");
-    data = core.selectFields(data, interpreterListingData);
+  console.info("getInterpreterListing: function invoked");
+  core.returnData(inrerpreterDataFields.interpreterListingData.data, inrerpreterDataFields.interpreterListingData.fields).then(function(data) {
+    console.log("getInterpreterListing: returning data");
     res.send(data);
-  }, function(error) {
-    // console.info("could not retrieve data");
-    console.info(error);
+  }).catch(function(error) {
+    console.log(error);
     res.status(500).send();
   })
-  .then(function(){
-    // console.info("cleaning up connection");
-    core.cleanUp()
-  })
 });
+
+exports.getInterpreterBio = functions.https.onRequest((req, res) => {
+  console.info("getInterpreterBio: function invoked");
+  core.returnData(inrerpreterDataFields.interpreterBioData.data, inrerpreterDataFields.interpreterBioData.fields).then(function(data) {
+    console.log("getInterpreterBio: returning data");
+    res.send(data);
+  }).catch(function(error) {
+    console.log(error);
+    res.status(500).send();
+  })});
+
+exports.getInterpreterEmail = functions.https.onRequest((req, res) => {
+  console.info("getInterpreterEmail: function invoked");
+  core.returnData(inrerpreterDataFields.interpreterEmailData.data, inrerpreterDataFields.interpreterEmailData.fields).then(function(data) {
+    console.log("getInterpreterEmail: returning data");
+    res.send(data);
+  }).catch(function(error) {
+    console.log(error);
+    res.status(500).send();
+  })});
